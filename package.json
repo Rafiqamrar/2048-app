@@ -12,9 +12,26 @@
   "dependencies": {
     "@nuxt/fonts": "^0.12.1",
     "@nuxt/ui": "^4.3.0",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.3.0",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.27",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@nuxt/eslint": "^1.13.0",
+    "@oxc-minify/binding-linux-x64-gnu": "^0.111.0",
+    "@oxc-parser/binding-linux-x64-gnu": "^0.111.0",
+    "@oxc-resolver/binding-linux-x64-gnu": "^11.16.4",
+    "@oxc-transform/binding-linux-x64-gnu": "^0.111.0",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^10.7.0",
+    "happy-dom": "^20.4.0",
+    "typescript-eslint": "^8.54.0",
+    "unplugin-auto-import": "^21.0.0",
+    "vitest": "^4.0.18",
+    "vue-tsc": "^3.2.4"
   }
 }
