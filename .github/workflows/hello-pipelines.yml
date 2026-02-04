@@ -1,0 +1,12 @@
+name: Hello Pipelines Workflow
+
+on:
+  push
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Print greeting message
+        run: echo "Hello pipelines' world !"
