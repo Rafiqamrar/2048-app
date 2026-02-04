@@ -52,7 +52,8 @@ echo ""
 # L'option --noEmit vérifie les types sans générer de fichiers
 
 echo "🔍 Step 2: Running TypeScript type checking (vue-tsc)..."
-pnpm exec vue-tsc --noEmit
+# pnpm exec vue-tsc --noEmit
+pnpm nuxt typecheck
 echo "✅ Type checking passed"
 echo ""
 
@@ -75,11 +76,14 @@ echo ""
 # On copie ensuite le résultat dans le dossier "publish"
 
 echo "🏗️ Step 4: Building application with Nuxt (uses Vite)..."
-pnpm nuxt generate
-# Copier le résultat dans le dossier publish
-rm -rf publish
-cp -r .output/public publish
-echo "✅ Build completed - output in publish/"
+# pnpm nuxt generate
+# # Copier le résultat dans le dossier publish
+# rm -rf publish
+# cp -r .output/public publish
+# echo "✅ Build completed - output in publish/"
+# echo ""
+pnpm nuxt build
+echo "✅ Build completed"
 echo ""
 
 # ===============================
