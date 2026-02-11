@@ -16,7 +16,7 @@ Mise en place d'un script d'integration continue qui automatise l'exécution des
 ## Initialisation du script
 
 1. Choisir un langage de script : bash ou [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell) par exemple (installer si nécessaire)
-2. A la racine du répertoire du projet, créer un dossier `pipelines` avec un fichier qui contiendra un script à l'intérieur
+2. A la racine du répertoire du projet, créer un dossier `deliverables/lab02` avec un fichier qui contiendra un script à l'intérieur
 
 ## Récupération des dépendances
 
@@ -29,23 +29,21 @@ Mise en place d'un script d'integration continue qui automatise l'exécution des
 
 ## Vérification du typage statique du code
 
-Vue 3 dispose d'un outil en ligne de commande de "type-checking" du code: [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc).
+Vue dispose d'un outil en ligne de commande de "type-checking" du code: [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc).
+Nuxt dispose d'une commande [typecheck ](https://nuxt.com/docs/4.x/api/commands/typecheck) qui utilise vue-tsc en interne.
 
-1. S'assurer que `vue-tsc` est bien installé dans le projet
-2. Exécuter l'analyse statique en ligne de commande via la commande `vue-tsc --noEmit` et vérifier que le projet ne comporte pas d'erreur
+2. Exécuter l'analyse statique en ligne de commande via la commande `nuxt typecheck` et vérifier que le projet ne comporte pas d'erreur
 3. Dans un des composants vue du projet qui fait appel à un autre composant, faire volontairement une faute de frappe sur une prop de cet autre composant
 4. Vérifier que l'IDE remonte une erreur comme quoi la prop n'existe pas
-5. Exécuter l'analyse statique en ligne de commande via la commande `vue-tsc --noEmit` et vérifier que l'erreur soit remontée également
+5. Exécuter l'analyse statique en ligne de commande via la commande `nuxt typecheck` et vérifier que l'erreur soit remontée également
 6. Supprimer la faute de frappe et ajouter cette étape de type-checking au script
-
-> Regarder comment utiliser vue-tsc via nuxt typecheck
 
 ## Analyse statique du code
 
 Un des principaux outils utilisez pour faire de l'analyse de code statique en JavaScript est [ESLint](https://eslint.org/)
 
 1. Parcourir rapidement le site [eslint](https://eslint.org/) pour comprendre le fonctionnement
-2. S'assurer que `eslint` est bien installé dans le projet
+2. Utiliser la doc où GitHub Copilot pour comprendre comment on configurer utiliser `eslint` sur le projet le projet
 3. Exécuter `eslint` pour qu'il analyse statiquement les fichiers Vue et TypeScript: s'assurer qu'il n'y a pas d'erreur
 4. Ajouter ou modifier du code pour qu'ESLint remonte une erreur. Constater que l'IDE remonte bien l'erreur
 5. Vérifier que l'erreur est bien remontée également en exécutant ESLint
@@ -53,14 +51,15 @@ Un des principaux outils utilisez pour faire de l'analyse de code statique en Ja
 
 ## Construction du "package" à déployer
 
-Afin de compiler le code pour produire le package/bundle qui sera utilisé en production, on utilise [Vite](https://vitejs.dev/) qui est un outil frontend similaire à Webpack mais beaucoup plus moderne. Vite est également utilisé lors du développement en fournissant un serveur de développement qui démarre très rapidement.
+Afin de compiler le code pour produire le package/bundle qui sera utilisé en production, on utilise [Vite](https://vitejs.dev/) qui est un outil frontend similaire à Webpack mais beaucoup plus moderne. Vite est également utilisé lors du développement en fournissant un serveur de développement qui démarre très rapidement. 
+
+Comme plein d'autre frameworks frontend, Nuxt utilise Vite en interne.
 
 1. Se familiariser à Vite en parcourant rapidement [sa documentation](https://vitejs.dev/guide/why.html)
-2. Construire le package avec la commande [vite build](https://vitejs.dev/guide/cli.html#build)
-3. Vérifier que le package est bien disponible dans le répertoire `dist` (répertoire par défaut)
-4. Réutiliser la commande avec le bon paramètre pour packager le code dans le répertoire `publish` plutôt que le répertoire `dist`
-5. Configurer git pour que le répertoire `publish` contenant le package ne soit pas `commit`.
-6. Vérifier que le package fonctionne bien en le lançant en local grace à la commande `vite preview`: l'application web devrait se lancer.
+2. Construire le package avec la commande [nuxt build](https://vitejs.dev/guide/cli.html#build)
+3. Vérifier que le package est bien disponible dans le répertoire `output` (répertoire par défaut)
+5. Configurer git pour que le répertoire `output` contenant le package ne soit pas `commit`.
+6. Vérifier que le package fonctionne bien en le lançant en local grace à la commande `nuxt preview`: l'application web devrait se lancer.
 7. Ajouter l'étape de packaging au script
 
 ## Exécution des tests

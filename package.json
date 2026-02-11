@@ -7,7 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.12.1",
@@ -25,6 +30,7 @@
     "@oxc-resolver/binding-linux-x64-gnu": "^11.16.4",
     "@oxc-transform/binding-linux-x64-gnu": "^0.111.0",
     "@vitejs/plugin-vue": "^6.0.3",
+    "@vitest/ui": "^4.0.18",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.39.2",
     "eslint-plugin-vue": "^10.7.0",
