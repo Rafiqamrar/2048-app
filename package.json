@@ -2,6 +2,7 @@
   "name": "2048-app",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@10.28.2",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -37,6 +38,8 @@
     "happy-dom": "^20.4.0",
     "typescript-eslint": "^8.54.0",
     "unplugin-auto-import": "^21.0.0",
+    "vitest": "^4.0.18",
+    "@types/node": "^25.2.3"
     "vitest": "^4.0.18",
     "vue-tsc": "^3.2.4"
   }
