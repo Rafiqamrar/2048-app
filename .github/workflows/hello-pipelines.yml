@@ -1,0 +1,16 @@
+name: Hello Pipelines
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo Hello Pipelines
+        run: echo "Hello pipelines' world!"
+      - name: Run Lab 2 CI Script
+        run: ./pipelines/ci.sh

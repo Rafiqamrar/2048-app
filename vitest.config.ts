@@ -18,7 +18,8 @@ export default defineConfig({
   ],
   test: {
     environment: 'happy-dom',
-    globals: true
+    globals: true,
+    include: ['**/*.{test,spec}.{js,ts,vue}']
   },
   resolve: {
     alias: {

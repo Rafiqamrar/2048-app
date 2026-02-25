@@ -1,0 +1,11 @@
+# TP2 Summary
+
+In this TP2, I followed the instructions to work with the 2048-app project using Git and GitHub:
+
+- I forked the teacher's repository (TechWatching/2048-app) to my own GitHub account.
+- I created a new branch called `lab2` in my forked repository to work on the TP2 tasks.
+- All my changes and answers for TP2 were made in the `lab2` branch.
+- I pushed my work to the `lab2` branch on my fork, so the teacher can review my answers.
+- I also set the original teacher's repository as the `upstream` remote to keep my fork up to date if needed.
+
+This workflow ensures my work is organized, versioned, and easy for the teacher to check.
