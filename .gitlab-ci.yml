@@ -1,0 +1,109 @@
+# =============================================
+# GitLab CI/CD Pipeline - Équivalent du GitHub Actions
+# =============================================
+
+# Définir les stages (ordre d'exécution)
+stages:
+  - build
+  - quality
+
+# =============================================
+# Variables globales
+# =============================================
+variables:
+  PNPM_VERSION: "10.28.2"
+  NODE_VERSION: "20"
+
+# =============================================
+# Cache pnpm (partagé entre tous les jobs)
+# =============================================
+.pnpm-cache: &pnpm-cache
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store/
+    policy: pull-push
+
+# =============================================
+# Template pour installer les dépendances
+# =============================================
+.setup-node: &setup-node
+  image: node:${NODE_VERSION}
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@${PNPM_VERSION} --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install
+
+# =============================================
+# RÈGLES DE DÉCLENCHEMENT
+# =============================================
+# Équivalent de paths-ignore: ['docs/**']
+.default-rules: &default-rules
+  rules:
+    - changes:
+        - docs/**
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "lab4"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "web"  # Équivalent workflow_dispatch
+
+# =============================================
+# JOB 1: BUILD (toujours exécuté)
+# =============================================
+build:
+  stage: build
+  <<: *setup-node
+  <<: *pnpm-cache
+  <<: *default-rules
+  script:
+    - pnpm run build
+  artifacts:
+    # Upload artifact UNIQUEMENT sur push vers main
+    paths:
+      - .output/
+    expire_in: 1 week
+    rules:
+      - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"
+
+# =============================================
+# JOB 2: LINT (uniquement sur Merge Request)
+# =============================================
+lint:
+  stage: quality
+  <<: *setup-node
+  <<: *pnpm-cache
+  needs: [build]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - pnpm run lint
+
+# =============================================
+# JOB 3: TYPECHECK (uniquement sur Merge Request)
+# =============================================
+typecheck:
+  stage: quality
+  <<: *setup-node
+  <<: *pnpm-cache
+  needs: [build]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - pnpm run typecheck
+
+# =============================================
+# JOB 4: TEST (uniquement sur Merge Request)
+# =============================================
+test:
+  stage: quality
+  <<: *setup-node
+  <<: *pnpm-cache
+  needs: [build]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - pnpm run test
