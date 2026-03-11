@@ -102,3 +102,4 @@ nuxt.config.ts        # Nuxt configuration
 
 > [!NOTE]
 > For questions or feedback, please open an issue or discussion in this repository.
+# test
