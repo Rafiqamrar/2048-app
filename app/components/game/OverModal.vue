@@ -19,7 +19,7 @@ const message = computed(() => isWon.value
       <p class="text-gray-600 dark:text-gray-300 mb-6">{{ message }}</p>
       <UButton 
         size="lg" 
-        color="primary"
+        color="red"
         @click="resetGame"
       >
         Play Again
